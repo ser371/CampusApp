@@ -58,7 +58,7 @@ const createExpressApp = require("./src/frameworks/config/express");
 // Import database connection
 // const db = require('./src/frameworks/database/db');
 // Import database connection
-const db = require('./src/infrastructure/database/db');
+// const db = require('./src/infrastructure/database/db');
 const { Sequelize } = require('sequelize');
 
 

@@ -1,24 +1,22 @@
-// src/frameworks/database/db.js
+const { sequalise } = require('sequelize')
+const { sequalise } = require('./models')
 
-const { Sequelize, DataTypes } = require('sequelize');
-const config = require('../../frameworks/config/database');
+const sequalise = new sequalise(
+    process.env.DB_NAME,       // Database name
+  process.env.DB_USER,       // Username
+  process.env.DB_PASSWORD,   // Password
+  {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: 'mssql',
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,          // Aiven requires SSL
+        rejectUnauthorized: false // Only for development (see note below)
+      }
+    }
+  }
+);
 
-// Create Sequelize instance
-const sequelize = new Sequelize(config);
-
-// Import model factories
-const UserFactory = require('./models/User');
-
-// Initialize models
-const User = UserFactory(sequelize, DataTypes);
-
-// Set up associations
-Object.values({ User }).forEach(model => {
-  if (model.associate) model.associate({ User });
-});
-
-// IMPORTANT: Must export sequelize as a named export
-module.exports = {
-  sequelize,  // This line is crucial
-  User,
-};
+module.exports = sequelize;
