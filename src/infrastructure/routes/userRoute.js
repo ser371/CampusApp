@@ -6,7 +6,7 @@ const RegisterUser = require('../../application/use-cases/user/RegisterUser');
 const UserController = require('../../infrastructure/constroller/UserController');
 
 // Instantiate the repository
-const userRepository = new UserRepository();
+const userRepository = new UserRepository();        
 
 // Instantiate the use case with the repository
 const registerUserUseCase = new RegisterUser(userRepository);
